@@ -4,7 +4,8 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import { FaReact, FaNodeJs, FaDocker, FaCube } from "react-icons/fa"; // Imported missing icons
+import { FaReact, FaNodeJs, FaDocker, FaCube } from "react-icons/fa";
+import { useTheme } from "../context/ColorTheme";
 
 const experiences = [
   {
@@ -61,10 +62,11 @@ const experiences = [
   },
 ];
 
-
 const WorkExperience = () => {
+  const { darkMode } = useTheme();
+
   return (
-    <section className="py-10 bg-gray-900  text-white">
+    <section className={`${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"} py-10`}>
       <div className="container mx-auto px-6 mt-24">
         <h2 className="text-4xl font-bold text-center mb-8">Work Experience</h2>
         <VerticalTimeline>
@@ -72,15 +74,22 @@ const WorkExperience = () => {
             <VerticalTimelineElement
               key={index}
               className="vertical-timeline-element--work"
-              contentStyle={{ background: "#1E293B", color: "#fff" }}
-              contentArrowStyle={{ borderRight: "7px solid #1E293B" }}
+              contentStyle={{
+                background: darkMode ? "#1E293B" : "#fff",
+                color: darkMode ? "#fff" : "#000",
+              }}
+              contentArrowStyle={{
+                borderRight: `7px solid ${darkMode ? "#1E293B" : "#fff"}`,
+              }}
               date={exp.date}
               iconStyle={{ background: exp.iconBg, color: "#fff" }}
               icon={exp.icon}
             >
               <h3 className="text-xl font-semibold">{exp.title}</h3>
-              <h4 className="text-md text-gray-400">{exp.company}</h4>
-              <ul className="list-disc list-inside mt-2 text-sm text-gray-300">
+              <h4 className={`text-md ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+                {exp.company}
+              </h4>
+              <ul className={`list-disc list-inside mt-2 text-sm ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
                 {exp.description.map((desc, i) => (
                   <li key={i}>{desc}</li>
                 ))}

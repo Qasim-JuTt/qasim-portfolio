@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { OrbitControls } from "@react-three/drei";
-import { Element } from "react-scroll"; // Import Element from react-scroll
-import earthTexture from "/images/globe.jpeg"; // Ensure you have an Earth texture image
+import { Element } from "react-scroll";
+import { useTheme } from "../context/ColorTheme"; // ✅ import useTheme
+import earthTexture from "/images/globe.jpeg";
 
 const SpinningGlobe = () => {
   const texture = useLoader(TextureLoader, earthTexture);
@@ -24,20 +26,42 @@ const SpinningGlobe = () => {
 };
 
 const ContactForm = () => {
+  const { darkMode } = useTheme(); // ✅ detect dark mode
+
+  // ✅ Tailwind classes based on theme
+  const bgColor = darkMode ? "bg-gray-900" : "bg-gray-100";
+  const cardBg = darkMode ? "bg-gray-700" : "bg-white";
+  const inputBg = darkMode ? "bg-gray-600 text-white" : "bg-gray-200 text-black";
+  const headingColor = darkMode ? "text-white" : "text-gray-900";
+
   return (
-    <Element name="contact-form"> {/* Wrap contact form with Element */}
-      <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-900 text-white p-10 w-full">
+    <Element name="contact-form">
+      <div className={`flex flex-col md:flex-row items-center justify-center min-h-screen ${bgColor} p-10 w-full`}>
         <div className="max-w-6xl w-full flex flex-col md:flex-row items-center justify-center gap-10">
-          <div className="w-full md:w-1/2 p-10 bg-gray-700 rounded-lg shadow-lg flex flex-col items-center">
-            <h2 className="text-4xl font-bold mb-6">Contact.</h2>
+          {/* Contact Form */}
+          <div className={`w-full md:w-1/2 p-10 rounded-lg shadow-lg flex flex-col items-center ${cardBg}`}>
+            <h2 className={`text-4xl font-bold mb-6 ${headingColor}`}>Contact.</h2>
             <form className="flex flex-col gap-6 w-full">
-              <input type="text" placeholder="What's your good name?" className="p-4 bg-gray-600 rounded text-white w-full" />
-              <input type="email" placeholder="What's your web address?" className="p-4 bg-gray-600 rounded text-white w-full" />
-              <textarea placeholder="What you want to say?" className="p-4 bg-gray-600 rounded text-white w-full h-32"></textarea>
-              <button className="p-4 bg-blue-600 hover:bg-blue-700 rounded w-full">Send</button>
+              <input
+                type="text"
+                placeholder="What's your good name?"
+                className={`p-4 rounded w-full ${inputBg}`}
+              />
+              <input
+                type="email"
+                placeholder="What's your web address?"
+                className={`p-4 rounded w-full ${inputBg}`}
+              />
+              <textarea
+                placeholder="What you want to say?"
+                className={`p-4 rounded w-full h-32 ${inputBg}`}
+              ></textarea>
+              <button className="p-4 bg-blue-600 hover:bg-blue-700 rounded w-full text-white">Send</button>
             </form>
           </div>
-          <div className="w-full md:w-1/2 h-[500px] flex justify-center items-center">
+
+          {/* 3D Globe */}
+          <div className="w-full md:w-1/2 h-[500px] justify-center items-center hidden md:flex">
             <Canvas>
               <ambientLight intensity={1} />
               <pointLight position={[10, 10, 10]} intensity={1.5} />

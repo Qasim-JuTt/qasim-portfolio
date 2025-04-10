@@ -1,9 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
-import { Element } from "react-scroll"; // Import Element from react-scroll
+import { Element } from "react-scroll";
 import Tilt from "react-parallax-tilt";
+import { useTheme } from "../context/ColorTheme";
 
 const MyProjects = () => {
+  const { darkMode } = useTheme();
+
   const projects = [
     {
       title: "Car Rent",
@@ -28,39 +31,44 @@ const MyProjects = () => {
     },
   ];
 
+  // Consistent background with Skills section
+  const sectionBg = darkMode ? "bg-gray-900" : "bg-gray-100";
+  const cardBg = "bg-white"; // Always white
+  const descColor = darkMode ? "text-gray-400" : "text-gray-600";
+  const tagColor = darkMode ? "text-purple-400" : "text-blue-600";
+
   return (
-    <Element name="project">   {/* Wrap project with Element */}
-      <div className="bg-gray-900 w-full">
-        <div className="max-w-6xl mx-auto text-white p-6 text-center">
+    <Element name="project">
+      <div className={`${sectionBg} w-full`}>
+        <div className="max-w-6xl mx-auto p-6 text-center">
           <motion.h2
-            className="text-4xl font-bold"
+            className={`text-4xl font-bold mb-12 text-center ${darkMode ? "text-white" : "text-black"}`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            My Projects.
+            My Projects
           </motion.h2>
+
           <motion.p
-            className="text-gray-400 my-10 text-justify"
+            className={`my-10 text-justify ${descColor}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            Explore my My Projects section to see the innovative web
-            applications I've built using the MERN stack. Each project showcases
-            my expertise in frontend and backend development, database
-            management, and API integration. From dynamic web platforms to
-            scalable applications, I focus on delivering high-performance and
-            user-friendly solutions. Take a look at my work and see how I bring
-            ideas to life!
+            Explore my My Projects section to see the innovative web applications I've built using the MERN stack.
+            Each project showcases my expertise in frontend and backend development, database management, and API integration.
+            From dynamic web platforms to scalable applications, I focus on delivering high-performance and user-friendly solutions.
+            Take a look at my work and see how I bring ideas to life!
           </motion.p>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
               <Tilt
                 key={index}
                 tiltMaxAngleX={15}
                 tiltMaxAngleY={15}
-                className="bg-gray-700 p-4 rounded-2xl shadow-lg"
+                className={`${cardBg} p-4 rounded-2xl shadow-lg`}
               >
                 <motion.div
                   className="p-6 rounded-lg"
@@ -72,13 +80,13 @@ const MyProjects = () => {
                     alt={project.title}
                     className="w-full h-32 object-cover rounded-lg mb-3"
                   />
-                  <h3 className="text-lg font-semibold">{project.title}</h3>
-                  <p className="text-gray-400 mt-1 text-sm">
+                  <h3 className="text-lg font-semibold text-gray-800">{project.title}</h3>
+                  <p className={`mt-1 text-sm ${descColor}`}>
                     {project.description}
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {project.tags.map((tag, idx) => (
-                      <span key={idx} className="text-xs text-blue-400">
+                      <span key={idx} className={`text-xs ${tagColor}`}>
                         {tag}
                       </span>
                     ))}

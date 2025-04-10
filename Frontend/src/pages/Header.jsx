@@ -10,14 +10,14 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`p-4 transition-all duration-300 ${
-        darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+      className={`p-4 transition-all duration-300 fixed top-0 left-0 w-full z-50 ${
+        darkMode ? "bg-gray-700 text-white" : "bg-gray-200 shadow-lg text-black"
       }`}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto  flex justify-between items-center">
         <div className="text-xl font-bold">Adrian | JavaScript Mastery</div>
 
         <div className="hidden md:flex space-x-6 mx-auto">

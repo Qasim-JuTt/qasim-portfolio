@@ -13,7 +13,7 @@ import { ThemeProvider } from "./context/ColorTheme";
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white">
+      <div className="min-h-screen bg-gray-200 text-black dark:bg-gray-900 dark:text-white">
         <Navbar />
         <Hero />
         <Overview />
