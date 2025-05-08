@@ -1,0 +1,33 @@
+@import "tailwindcss";
+/* Light Mode */
+.light-theme {
+    background-color: white;
+    color: black;
+  }
+  
+  .light-theme .bg-gray-900 {
+    background-color: white !important;
+  }
+  
+  .light-theme .text-white {
+    color: black !important;
+  }
+  
+  /* Dark Mode (Gray Theme) */
+  .dark-theme {
+    background-color: #1E293B;
+    color: white;
+  }
+  
+  .dark-theme .bg-white {
+    background-color: #1E293B!important;
+  }
+  
+  .dark-theme .text-black {
+    color: white !important;
+  }
+  
+  .dark-theme .bg-gray-900 {
+    background-color: #1E293B !important;
+  }
+  
