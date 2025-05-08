@@ -18,7 +18,7 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto  flex justify-between items-center">
-        <div className="text-xl font-bold">Adrian | JavaScript Mastery</div>
+        <div className="text-xl font-bold">Qasim | JavaScript Mastery</div>
 
         <div className="hidden md:flex space-x-6 mx-auto">
           <a href="#" className="hover:text-purple-400">About</a>
